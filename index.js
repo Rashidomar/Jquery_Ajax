@@ -10,11 +10,12 @@ $(document).ready(function(){
             upload();
 
         }else{
-            alert("PLease select a file..");
+
+           alert("Please select a file ..")
         }
 
 
-    })
+    });
         // File upload via Ajax
         function upload(){
             $("#uploadForm").on('submit', function(e){
@@ -40,14 +41,14 @@ $(document).ready(function(){
                     processData:false,
                     beforeSend: function(){
                         $(".progress-bar").width('0%'); 
-                        $('#uploadStatus').html('<img src="images/uploading.gif"/>');
+    
                     },
                     error:function(){
-                        $('#uploadStatus').html('<span style="color:#EA4335;">Images upload failed, please try again.<span>');
+                        $('#uploadStatus').html('<div class="alert alert-danger"><strong>Images upload failed,</strong> please try again.</div>')
                     },
                     success: function(data){
                         $('#uploadForm')[0].reset();
-                        $('#uploadStatus').html('<span style="color:#28A74B;">Images uploaded successfully.<span>');
+                        $('#uploadStatus').html('<div class="alert alert-success"><strong>Sucessful</strong> File upload was successful.</div>')
                         $('.gallery').html(data);
                     }
                 });

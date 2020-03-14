@@ -44,6 +44,21 @@ for( $i=0 ; $i < $total ; $i++ ) {
 
 		if($insert){
 
+      $last_id = $db->insert_id;
+
+      $qu = "SELECT * FROM images WHERE id='$last_id'";
+
+      $result = $db->query($qu);
+
+    // Generate gallery view of the images
+    if($result){
+        echo '<ul>';
+        while($row = $result->fetch_assoc()){
+            echo '<li><img class="img-thumbnail" src="uploads/'.$row['file_name'].'" alt=""></li>';
+        }
+        echo '</ul>';
+     }
+
 		}else{
 			echo $db->error;
 		}
@@ -52,17 +67,7 @@ for( $i=0 ; $i < $total ; $i++ ) {
   }
 }
 
-$qu = "SELECT * FROM images";
-$result = $db->query($qu);
 
-    // Generate gallery view of the images
-    if($result){
-        echo '<ul>';
-        while($row = $result->fetch_assoc()){
-            echo '<li><img src="uploads/'.$row['file_name'].'" alt=""></li>';
-        }
-        echo '</ul>';
-     }
 
 // }
 
